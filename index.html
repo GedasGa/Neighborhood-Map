@@ -1,30 +1,47 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <title>Simple Map</title>
-    <meta name="viewport" content="initial-scale=1.0">
-    <meta charset="utf-8">
-    <link href="src/css/main.css" rel="stylesheet" type="text/css">
-</head>
+    <head>
+        <!-- Required Meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<body>
-    <div id="map"></div>
-    <script>
-        var map;
-        function initMap() {
-            map = new google.maps.Map(document.getElementById('map'), {
-                center: { lat: -34.397, lng: 150.644 },
-                zoom: 8
-            });
-        }
-    </script>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy"
+            crossorigin="anonymous">
 
+        <!-- Main CSS-->
+        <link href="src/css/main.css" rel="stylesheet" type="text/css">
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzbNu_1juyA166VxKfPQGDnfhs7a4Bkys&callback=initMap" async defer></script>
+        <title>Neighborhood Map</title>
+    </head>
 
-    <!-- Main -->
-    <script src="src/js/app.js"></script>
-</body>
+    <body>
+        <div id="map"></div>
+        <script>
+            var map;
+            function initMap() {
+                map = new google.maps.Map(document.getElementById('map'), {
+                    center: { lat: -34.397, lng: 150.644 },
+                    zoom: 8
+                });
+            }
+        </script>
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4"
+            crossorigin="anonymous"></script>
+
+        <!-- Asynchronously load Google Maps API -->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzbNu_1juyA166VxKfPQGDnfhs7a4Bkys&callback=initMap" async defer></script>
+
+        <!-- Main JavaScript file -->
+        <script src="src/js/app.js"></script>
+    </body>
 
 </html>
