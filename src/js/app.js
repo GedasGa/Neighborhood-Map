@@ -1,7 +1,13 @@
+//Global variables
+// ----------------------------------------------------------------- //
+// Create a map variable
+var map;
+// ----------------------------------------------------------------- //
+
 // Data model
 // ----------------------------------------------------------------- //
-var markersModel = function() {
-    currentMarker: ko.obervable(null);
+var markersModel = {
+    currentMarker: ko.observable(null),
     markers: [
         { 
             title: "Quadrum",
@@ -28,7 +34,7 @@ var markersModel = function() {
             location: { lat: 54.696533, lng: 25.279056 }, 
             address: "Lvovo g. 25" 
         }
-    ];
+    ]
 };
 
 var stylesArray = [
@@ -113,12 +119,24 @@ var stylesArray = [
 ];
 // ----------------------------------------------------------------- //
 
-var ViewModel = function () {
+var LocationMarker = function(data) {
     var self = this;
 
-    // Create a map variable
-    var map;
+    self.title = ko.observable(data.title);
+    self.location = ko.observable(data.location);
+    self.address = ko.observable(data.address);
+
+    self.marker = new google.maps.Marker({
+        position: self.location(),
+        map: map,
+        title: self.address()
+    });
     
+};
+
+var ViewModel = function() {
+    var self = this;
+
     // Create a new blank array for all the listing markers.
     this.markers = ko.observableArray([]);
 
@@ -137,6 +155,13 @@ var ViewModel = function () {
     };
 
     this.initMap();
+
+    markersModel.markers.forEach(function(markerItem){
+        self.markers.push(new LocationMarker(markerItem));
+        //console.log(markerItem);
+    });
+
+    //this.currentmMrker = ko.observable(this.markers()[0]);
 
 };
 
