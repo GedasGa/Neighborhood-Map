@@ -1,7 +1,9 @@
 //Global variables
 // ----------------------------------------------------------------- //
-// Create a map variable
+// Create a map variable.
 var map;
+// Create a single infowindow variable.
+var infowindow;
 // ----------------------------------------------------------------- //
 
 // Data model
@@ -122,16 +124,50 @@ var stylesArray = [
 var LocationMarker = function(data) {
     var self = this;
 
-    self.title = ko.observable(data.title);
-    self.location = ko.observable(data.location);
-    self.address = ko.observable(data.address);
+    this.title = ko.observable(data.title);
+    this.location = ko.observable(data.location);
+    this.address = ko.observable(data.address);
 
-    self.marker = new google.maps.Marker({
+    //Constructor creates a new google maps InfoWindowr.
+    infowindow = new google.maps.InfoWindow();
+
+    // Style the markers a bit. This will be our listing marker icon.
+    //var defaultIcon = makeMarkerIcon('f03737');
+    // Create a "highlighted location" marker color for when the user
+    // mouses over the marker.
+    //var highlightedIcon = makeMarkerIcon('0091ff');
+
+    // Set market to the map.
+    this.marker = new google.maps.Marker({
         position: self.location(),
-        map: map,
-        title: self.address()
+        title: self.title(),
+        address: self.address(),
+        map: map
     });
-    
+
+    // Create an onclick event to open an infowindow at each marker.
+    this.marker.addListener('click', function () {
+        populateInfoWindow(self.marker, infowindow);
+    });
+
+    // This function populates the infowindow when the marker is clicked. We'll only allow
+    // one infowindow which will open at the marker that is clicked, and populate based
+    // on that markers position.
+    function populateInfoWindow(marker, infowindow) {
+        // Check to make sure the infowindow is not already opened on this marker.
+        if (infowindow.marker != marker) {
+            infowindow.marker = marker;
+            infowindow.setContent('<div><h1>' + marker.title + '<h1>' +
+                '<p><strong>Address: </strong><span>' + marker.address +
+                '<span></p></div>');
+            infowindow.open(map, marker);
+            // Make sure the marker property is cleared if the infowindow is closed.
+            infowindow.addListener('closeclick', function () {
+                infowindow.marker = null;
+            });
+        }
+    }
+
 };
 
 var ViewModel = function() {
