@@ -155,6 +155,17 @@ var LocationMarker = function(data) {
         populateInfoWindow(self.marker, infowindow, contentString);
     });
 
+    // Create two event listeners - one for mouseover, one for mouseout,
+    // to change the marker icon colors back and forth.
+    marker.addListener('mouseover', function () {
+        //set highligthed icon color
+        //this.setIcon(highlightedIcon);
+    });
+    marker.addListener('mouseout', function () {
+        //set default icon color
+        //this.setIcon(defaultIcon);
+    });
+
     // This function populates the infowindow when the marker is clicked. We'll only allow
     // one infowindow which will open at the marker that is clicked, and populate based
     // on that markers position.
