@@ -147,6 +147,7 @@ var LocationMarker = function(data) {
         position: self.location(),
         title: self.title(),
         address: self.address(),
+        animation: google.maps.Animation.DROP,
         map: map,
         icon: defaultIcon
     });
@@ -154,6 +155,7 @@ var LocationMarker = function(data) {
     // Create an onclick event to open an infowindow at each marker.
     this.marker.addListener('click', function () {
         populateInfoWindow(self.marker, infowindow, contentString);
+        toggleBounce(self.marker);
     });
 
     // Create two event listeners - one for mouseover, one for mouseout,
@@ -183,6 +185,17 @@ var LocationMarker = function(data) {
         }
     }
 
+    //This function add bounce animation to marker when clicked on it. It has a
+    //timeout function which sets animation to null again after 1500ms.
+    function toggleBounce(marker) {
+        if (marker.getAnimation() !== null) {
+            marker.setAnimation(null);
+        } else {
+            marker.setAnimation(google.maps.Animation.BOUNCE);
+            setTimeout(function() {marker.setAnimation(null);}, 1500);
+        }
+    }
+
     // This function takes in a COLOR, and then creates a new marker
     // icon of that color. The icon will be 25 px wide by 35 high, have an origin
     // of 0, 0 and be anchored at 10, 34).
@@ -196,7 +209,6 @@ var LocationMarker = function(data) {
             new google.maps.Size(25, 35));
         return markerImage;
     }
-
 };
 
 var ViewModel = function() {
