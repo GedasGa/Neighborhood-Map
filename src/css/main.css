@@ -51,8 +51,8 @@ html, body {
 }
 
 #wrapper.toggled #page-content-wrapper {
-  position: absolute;
-  margin-right: -400px;
+  position: relative;
+  margin-right: 0;
 }
 
 /* Sidebar Styles */
