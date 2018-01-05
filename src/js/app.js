@@ -137,17 +137,18 @@ var LocationMarker = function(data) {
                         '</span></p></div>';
 
     // Style the markers a bit. This will be our listing marker icon.
-    //var defaultIcon = makeMarkerIcon('f03737');
+    var defaultIcon = makeMarkerIcon('f03737');
     // Create a "highlighted location" marker color for when the user
     // mouses over the marker.
-    //var highlightedIcon = makeMarkerIcon('0091ff');
+    var highlightedIcon = makeMarkerIcon('0091ff');
 
     // Set market to the map.
     this.marker = new google.maps.Marker({
         position: self.location(),
         title: self.title(),
         address: self.address(),
-        map: map
+        map: map,
+        icon: defaultIcon
     });
 
     // Create an onclick event to open an infowindow at each marker.
@@ -157,13 +158,13 @@ var LocationMarker = function(data) {
 
     // Create two event listeners - one for mouseover, one for mouseout,
     // to change the marker icon colors back and forth.
-    marker.addListener('mouseover', function () {
+    this.marker.addListener('mouseover', function () {
         //set highligthed icon color
-        //this.setIcon(highlightedIcon);
+        this.setIcon(highlightedIcon);
     });
-    marker.addListener('mouseout', function () {
+    this.marker.addListener('mouseout', function () {
         //set default icon color
-        //this.setIcon(defaultIcon);
+        this.setIcon(defaultIcon);
     });
 
     // This function populates the infowindow when the marker is clicked. We'll only allow
@@ -180,6 +181,20 @@ var LocationMarker = function(data) {
                 infowindow.marker = null;
             });
         }
+    }
+
+    // This function takes in a COLOR, and then creates a new marker
+    // icon of that color. The icon will be 25 px wide by 35 high, have an origin
+    // of 0, 0 and be anchored at 10, 34).
+    function makeMarkerIcon(markerColor) {
+        var markerImage = new google.maps.MarkerImage(
+            'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|' + markerColor +
+            '|40|_|%E2%80%A2',
+            new google.maps.Size(25, 35),
+            new google.maps.Point(0, 0),
+            new google.maps.Point(10, 34),
+            new google.maps.Size(25, 35));
+        return markerImage;
     }
 
 };
