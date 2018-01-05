@@ -128,8 +128,13 @@ var LocationMarker = function(data) {
     this.location = ko.observable(data.location);
     this.address = ko.observable(data.address);
 
-    //Constructor creates a new google maps InfoWindowr.
+    //Constructor creates a new Google Maps InfoWindow.
     infowindow = new google.maps.InfoWindow();
+
+    //Content string for infowindow.
+    var contentString = '<div><h1>' + this.title() + '</h1>' +
+                        '<p><strong>Address: </strong><span>' + this.address() +
+                        '</span></p></div>';
 
     // Style the markers a bit. This will be our listing marker icon.
     //var defaultIcon = makeMarkerIcon('f03737');
@@ -147,19 +152,17 @@ var LocationMarker = function(data) {
 
     // Create an onclick event to open an infowindow at each marker.
     this.marker.addListener('click', function () {
-        populateInfoWindow(self.marker, infowindow);
+        populateInfoWindow(self.marker, infowindow, contentString);
     });
 
     // This function populates the infowindow when the marker is clicked. We'll only allow
     // one infowindow which will open at the marker that is clicked, and populate based
     // on that markers position.
-    function populateInfoWindow(marker, infowindow) {
+    function populateInfoWindow(marker, infowindow, contentString) {
         // Check to make sure the infowindow is not already opened on this marker.
         if (infowindow.marker != marker) {
             infowindow.marker = marker;
-            infowindow.setContent('<div><h1>' + marker.title + '<h1>' +
-                '<p><strong>Address: </strong><span>' + marker.address +
-                '<span></p></div>');
+            infowindow.setContent(contentString);
             infowindow.open(map, marker);
             // Make sure the marker property is cleared if the infowindow is closed.
             infowindow.addListener('closeclick', function () {
@@ -201,7 +204,7 @@ var ViewModel = function() {
 
 };
 
-// Google Maps API callback function for starting the appl
+// Google Maps API callback function for starting the app.
 function startApp() {
     ko.applyBindings(new ViewModel());
 };
