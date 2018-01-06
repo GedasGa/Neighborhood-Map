@@ -176,14 +176,13 @@ var LocationMarker = function(data) {
         this.setIcon(defaultIcon);
     });
 
-    // This function will loop through the markers array and display them all.
+    // This function will set marker on the map.
     this.showMarker = ko.computed(function () {
         if (this.visible() === true) {
             this.marker.setMap(map);
         } else {
             this.marker.setMap(null);
         }
-        //return false;
     }, this);
 
     // This function populates the infowindow when the marker is clicked. We'll only allow
