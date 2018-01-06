@@ -28,10 +28,14 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link active" href="#map" data-bind="click: startApp">Map
+                    <li class="nav-item">
+                    <a class="nav-link active" href="#map" onClick="window.location.reload()"><i class="fa fa-refresh" aria-label="true"></i> Map
                         <span class="sr-only">(current)</span>
                     </a>
-                    <input class="form-control mr-sm-2" type="search" data-bind="textInput: searchLocation" placeholder="Search" aria-label="Search">
+                    </li>
+                    <li class="nav-item">
+                        <input class="form-control mr-sm-2" type="search" data-bind="textInput: searchLocation, valueUpdate: 'afterkeydown'" placeholder="Search" aria-label="Search">
+                    </li>
                 </div>
             </div>
         </nav>
