@@ -176,6 +176,16 @@ var LocationMarker = function(data) {
         this.setIcon(defaultIcon);
     });
 
+    // This function will loop through the markers array and display them all.
+    this.showMarker = ko.computed(function () {
+        if (this.visible() === true) {
+            this.marker.setMap(map);
+        } else {
+            this.marker.setMap(null);
+        }
+        //return false;
+    }, this);
+
     // This function populates the infowindow when the marker is clicked. We'll only allow
     // one infowindow which will open at the marker that is clicked, and populate based
     // on that markers position.
@@ -250,15 +260,17 @@ var ViewModel = function() {
     });
 
     // Filter 
-    this.filteredLocations = ko.computed(function () {
+    this.filteredLocations = ko.computed(function() {
         var filter = self.searchLocation().toLowerCase(); // get string from search box
+        // If filter is empty, set all markers to visible. (All visibile by default.)
         if (!filter) {
             self.markers().forEach(function(markerItem) {
                 markerItem.visible(true);
             });
             return self.markers();
+        // Else filter markers array by setting markers visible to true or false.
         } else {
-            return ko.utils.arrayFilter(self.markers(), function (markerItem) {
+            return ko.utils.arrayFilter(self.markers(), function(markerItem) {
                 console.log(markerItem);
                 console.log(markerItem.title());
                 var string = markerItem.title().toLowerCase();
