@@ -6,6 +6,8 @@ var map;
 var infowindow;
 // Create a single bounds variable to track map bounds.
 var bounds;
+
+var ClientID = "CJPJUDXQJCX5JIEVNANDJLQGVZ3VJ1NGHBP1UTXVSIMU0FCE";
 // ----------------------------------------------------------------- //
 
 // Data model
@@ -133,12 +135,20 @@ var LocationMarker = function(data) {
     // Add new observable to check if marker should be visible
     this.visible = ko.observable(true);
 
+    var foursquareURL = 'https://api.foursquare.com/v2/venues/search?ll=' + this.location().lat + ',' + this.location().lng +
+        '&client_id=' + ClientID + '&v=20180106' + '&query=' + this.title();
+
+    $.getJSON(foursquareURL).done(function(data) {
+        var results = data.response.venues[0];
+        console.log(results);
+    }).fail(function () {
+        alert("Request failed");
+    });
+
     //Content string for infowindow.
     var contentString = '<div><h1>' + this.title() + '</h1>' +
                         '<p><strong>Address: </strong><span>' + this.address() +
                         '</span></p></div>';
-
-
 
     // Style the markers a bit. This will be our listing marker icon.
     var defaultIcon = makeMarkerIcon('f03737');
