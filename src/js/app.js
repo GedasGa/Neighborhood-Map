@@ -4,6 +4,8 @@
 var map;
 // Create a single infowindow variable.
 var infowindow;
+// Create a single bounds variable to track map bounds.
+var bounds;
 // ----------------------------------------------------------------- //
 
 // Data model
@@ -131,9 +133,6 @@ var LocationMarker = function(data) {
     // Add new observable to check if marker should be visible
     this.visible = ko.observable(true);
 
-    //Constructor creates a new Google Maps InfoWindow.
-    infowindow = new google.maps.InfoWindow();
-
     //Content string for infowindow.
     var contentString = '<div><h1>' + this.title() + '</h1>' +
                         '<p><strong>Address: </strong><span>' + this.address() +
@@ -156,6 +155,7 @@ var LocationMarker = function(data) {
     // Create an onclick event to open an infowindow at each marker.
     this.marker.addListener('click', function () {
         populateInfoWindow(self.marker, infowindow, contentString);
+        panToMarker(self.marker);
         toggleBounce(self.marker);
     });
 
@@ -175,10 +175,12 @@ var LocationMarker = function(data) {
         this.setIcon(defaultIcon);
     });
 
-    // This function will set marker on the map.
+    // This function will set marker on the map and extend map bounds.
     this.showMarker = ko.computed(function () {
         if (this.visible() === true) {
             this.marker.setMap(map);
+            bounds.extend(self.marker.position);
+            map.fitBounds(bounds);
         } else {
             this.marker.setMap(null);
         }
@@ -199,6 +201,12 @@ var LocationMarker = function(data) {
             });
         }
     }
+
+    //This function sets map zoom to 18 and centers map to selected marker position.
+    function panToMarker(marker) {
+        map.setZoom(18);
+        map.setCenter(marker.position);
+    };
 
     //This function add bounce animation to marker when clicked on it. It has a
     //timeout function which sets animation to null again after 1500ms.
@@ -246,6 +254,12 @@ var ViewModel = function() {
         };
         // Constructor creates a new Map inside of the given HTML container.
         map = new google.maps.Map(mapCanvas, mapOptions);
+
+        //Constructor creates a new Google Maps InfoWindow.
+        infowindow = new google.maps.InfoWindow();
+
+        //Constructor creates a new Google Maps LatLngBounds.
+        bounds = new google.maps.LatLngBounds();
 
     };
 
