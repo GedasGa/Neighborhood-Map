@@ -128,6 +128,9 @@ var LocationMarker = function(data) {
     this.location = ko.observable(data.location);
     this.address = ko.observable(data.address);
 
+    // Add new observable to check if marker should be visible
+    this.visible = ko.observable(true);
+
     //Constructor creates a new Google Maps InfoWindow.
     infowindow = new google.maps.InfoWindow();
 
@@ -142,7 +145,6 @@ var LocationMarker = function(data) {
     // mouses over the marker.
     var highlightedIcon = makeMarkerIcon('0091ff');
 
-    // Set market to the map.
     this.marker = new google.maps.Marker({
         position: self.location(),
         title: self.title(),
@@ -157,6 +159,11 @@ var LocationMarker = function(data) {
         populateInfoWindow(self.marker, infowindow, contentString);
         toggleBounce(self.marker);
     });
+
+    // Trigger marker's click when it's title is cliked in sidebar
+    this.triggerMarkerClick = function (marker) {
+        google.maps.event.trigger(self.marker, 'click');
+    };
 
     // Create two event listeners - one for mouseover, one for mouseout,
     // to change the marker icon colors back and forth.
@@ -217,6 +224,8 @@ var ViewModel = function() {
     // Create a new blank array for all the listing markers.
     this.markers = ko.observableArray([]);
 
+    this.searchLocation = ko.observable("");
+
     // Function to initialize the map within the map div
     this.initMap = function () {
         var mapCanvas = document.getElementById('map');
@@ -234,12 +243,34 @@ var ViewModel = function() {
 
     this.initMap();
 
+
+    // Set initial location markers
     markersModel.markers.forEach(function(markerItem){
         self.markers.push(new LocationMarker(markerItem));
-        //console.log(markerItem);
     });
 
-    //this.currentmMrker = ko.observable(this.markers()[0]);
+    // Filter 
+    this.filteredLocations = ko.computed(function () {
+        var filter = self.searchLocation().toLowerCase(); // get string from search box
+        if (!filter) {
+            self.markers().forEach(function(markerItem) {
+                markerItem.visible(true);
+            });
+            return self.markers();
+        } else {
+            return ko.utils.arrayFilter(self.markers(), function (markerItem) {
+                console.log(markerItem);
+                console.log(markerItem.title());
+                var string = markerItem.title().toLowerCase();
+                var result = (string.search(filter) >= 0);
+                console.log("rezultatas:");
+                console.log(result);
+                markerItem.visible(result);
+                return result;
+            });
+        }
+    }, self);
+    
 
 };
 
