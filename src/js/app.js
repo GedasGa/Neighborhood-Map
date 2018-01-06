@@ -150,7 +150,6 @@ var LocationMarker = function(data) {
         title: self.title(),
         address: self.address(),
         animation: google.maps.Animation.DROP,
-        map: map,
         icon: defaultIcon
     });
 
