@@ -82,7 +82,7 @@ html, body {
 .sidebar-nav li a {
   display: block;
   text-decoration: none;
-  color: #999999;
+  color: #5a0606;
 }
 
 .sidebar-nav li a:hover {
@@ -142,21 +142,29 @@ html, body {
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
-    /* padding: 0 !important;
-    margin: 0 !important; */
+    padding: 0;
+    margin: 0;
     box-shadow: none;
 }
 
 #menu-toggle.toggled {
-    position: fixed;
-    height: 100%;
-    width: 25px;
+    -webkit-transform: translate(300px, 0);
+    -moz-transform: translate(300px, 0);
+    -o-transform: translate(300px, 0);
     transform: translate(300px, 0);
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
-    /* padding: 0 !important;
-    margin: 0 !important; */
-    box-shadow: none;
+}
+
+#menu-toggle.toggled>.fa {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
 }
