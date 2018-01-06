@@ -138,6 +138,8 @@ var LocationMarker = function(data) {
                         '<p><strong>Address: </strong><span>' + this.address() +
                         '</span></p></div>';
 
+
+
     // Style the markers a bit. This will be our listing marker icon.
     var defaultIcon = makeMarkerIcon('f03737');
     // Create a "highlighted location" marker color for when the user
@@ -198,6 +200,7 @@ var LocationMarker = function(data) {
             // Make sure the marker property is cleared if the infowindow is closed.
             infowindow.addListener('closeclick', function () {
                 infowindow.marker = null;
+                map.fitBounds(bounds);
             });
         }
     }
@@ -306,8 +309,8 @@ $(window).resize(function () {
     $('#map').css('height', (h - offsetTop));
 }).resize();
 
-$("#menu-toggle").click(function (e) {
+$('#menu-toggle').click(function (e) {
     e.preventDefault();
-    $("#wrapper").toggleClass("toggled");
-    $("#menu-toggle").toggleClass("toggled");
+    $('#wrapper').toggleClass('toggled');
+    $('#menu-toggle').toggleClass('toggled');
 });
