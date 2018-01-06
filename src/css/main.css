@@ -29,7 +29,7 @@ html, body {
 }
 
 #wrapper.toggled {
-  padding-left: 300px;
+  padding-left: 325px;
 }
 
 #sidebar-wrapper {
@@ -68,7 +68,7 @@ html, body {
 .sidebar-nav {
   position: absolute;
   top: 0;
-  width: 400px;
+  width: 300px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -115,10 +115,10 @@ html, body {
     padding-left: 25px;
   }
   #wrapper.toggled {
-    padding-left: 300px;
+    padding-left: 325px;
   }
   #sidebar-wrapper {
-    width: 0;
+    width: 25px;
   }
   #wrapper.toggled #sidebar-wrapper {
     width: 300px;
@@ -135,7 +135,28 @@ html, body {
 
 /* Menu toggle button styles */
 #menu-toggle {
-    position: absolute;
-    left: 25px;
-    top: 25px;
+    position: fixed;
+    height: 100%;
+    width: 25px;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    /* padding: 0 !important;
+    margin: 0 !important; */
+    box-shadow: none;
+}
+
+#menu-toggle.toggled {
+    position: fixed;
+    height: 100%;
+    width: 25px;
+    transform: translate(300px, 0);
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    /* padding: 0 !important;
+    margin: 0 !important; */
+    box-shadow: none;
 }
