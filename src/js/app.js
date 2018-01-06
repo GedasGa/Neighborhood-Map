@@ -271,8 +271,8 @@ var ViewModel = function() {
         self.markers.push(new LocationMarker(markerItem));
     });
 
-    // Filter 
     this.filteredLocations = ko.computed(function() {
+        // console.log(filter);
         var filter = self.searchLocation().toLowerCase(); // get string from search box
         // If filter is empty, set all markers to visible. (All visibile by default.)
         if (!filter) {
@@ -283,14 +283,10 @@ var ViewModel = function() {
         // Else filter markers array by setting markers visible to true or false.
         } else {
             return ko.utils.arrayFilter(self.markers(), function(markerItem) {
-                console.log(markerItem);
-                console.log(markerItem.title());
                 var string = markerItem.title().toLowerCase();
                 var result = (string.search(filter) >= 0);
-                console.log("rezultatas:");
-                console.log(result);
                 markerItem.visible(result);
-                return result;
+                return result;                
             });
         }
     }, self);
