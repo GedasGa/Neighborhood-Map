@@ -220,6 +220,7 @@ var ViewModel = function() {
     // Function to initialize the map within the map div
     this.initMap = function () {
         var mapCanvas = document.getElementById('map');
+        console.log(mapCanvas);
         var mapOptions = {
             center: new google.maps.LatLng(54.698052, 25.271241),
             zoom: 15,
@@ -246,3 +247,16 @@ var ViewModel = function() {
 function startApp() {
     ko.applyBindings(new ViewModel());
 };
+
+$(window).resize(function () {
+    var h = $(window).height(),
+        offsetTop = 56; // Calculate the top offset
+
+    $('#map').css('height', (h - offsetTop));
+}).resize();
+
+$("#menu-toggle").click(function (e) {
+    e.preventDefault();
+    $("#wrapper").toggleClass("toggled");
+    $("#menu-toggle").toggleClass("toggled");
+});
