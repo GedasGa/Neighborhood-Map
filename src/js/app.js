@@ -35,7 +35,7 @@ var LocationMarker = function(data) {
         self.address = results.location.address;
         self.url = results.url;
     }).fail(function () {
-        alert("Foursquare API request failed.");
+        alert("Something went wrong with Foursquare API request.");
     });
 
     // Style the markers a bit. This will be our listing marker icon.
@@ -202,3 +202,7 @@ var ViewModel = function() {
 function startApp() {
     ko.applyBindings(new ViewModel());
 };
+
+function googleError() {
+    alert("Something went wrong with Google Map API request.");
+}

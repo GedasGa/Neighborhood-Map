@@ -77,7 +77,7 @@
 
         <!-- Asynchronously load Google Maps API -->
         <script src="https://maps.googleapis.com/maps/api/js?libraries=geometry,drawing&key=AIzaSyDzbNu_1juyA166VxKfPQGDnfhs7a4Bkys&v=3&callback=startApp"
-            async defer></script>
+            async defer onerror="googleError()"></script>
 
         <!-- Knockout and Main JavaScript file -->
         <script src="src/js/lib/knockout-3.2.0.js"></script>
