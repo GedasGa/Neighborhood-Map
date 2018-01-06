@@ -6,8 +6,6 @@ var map;
 var infowindow;
 // Create a single bounds variable to track map bounds.
 var bounds;
-
-var ClientID = "CJPJUDXQJCX5JIEVNANDJLQGVZ3VJ1NGHBP1UTXVSIMU0FCE";
 // ----------------------------------------------------------------- //
 
 // Data model
@@ -17,28 +15,27 @@ var markersModel = {
     markers: [
         { 
             title: "Quadrum",
-            location: { lat: 54.698355, lng: 25.270992 },
-            address: "Konstitucijos pr. 21" 
+            location: { lat: 54.698355, lng: 25.270992 }
         },
         { 
             title: "Swedbank",
-            location: { lat: 54.695926, lng: 25.273732 }, 
-            address: "Konstitucijos pr. 20A" 
+            location: { lat: 54.695926, lng: 25.273732 }
         },
         { 
             title: "Europa", 
-            location: { lat: 54.696214, lng: 25.276796 }, 
-            address: "Konstitucijos pr. 7" 
+            location: { lat: 54.696214, lng: 25.276796 }
         },
         { 
             title: "K29", 
-            location: { lat: 54.699611, lng: 25.265009 }, 
-            address: "Konstitucijos pr. 29" 
+            location: { lat: 54.699611, lng: 25.265009 } 
         },
         { 
             title: "3 Burės",
-            location: { lat: 54.696533, lng: 25.279056 }, 
-            address: "Lvovo g. 25" 
+            location: { lat: 54.696533, lng: 25.279056 }
+        },
+        {
+            title: "Green Hall",
+            location: { lat: 54.695567, lng: 25.260019 }
         }
     ]
 };
@@ -130,25 +127,30 @@ var LocationMarker = function(data) {
 
     this.title = ko.observable(data.title);
     this.location = ko.observable(data.location);
-    this.address = ko.observable(data.address);
+
+    // Variables to store data from Foursquare API
+    this.name = "";
+    this.address = "";
+    this.url = "";
 
     // Add new observable to check if marker should be visible
     this.visible = ko.observable(true);
 
+    // Foursquare API request
+    var ClientID = "CJPJUDXQJCX5JIEVNANDJLQGVZ3VJ1NGHBP1UTXVSIMU0FCE";
+    var clientSecret = "FTLSB1P5JMTGRQL0T2UXHOG1KQDUKHZJ3PECKNUNE1JYBDZH";
+
     var foursquareURL = 'https://api.foursquare.com/v2/venues/search?ll=' + this.location().lat + ',' + this.location().lng +
-        '&client_id=' + ClientID + '&v=20180106' + '&query=' + this.title();
+        '&client_id=' + ClientID + '&client_secret=' + clientSecret + '&v=20180106&query=' + this.title();
 
     $.getJSON(foursquareURL).done(function(data) {
         var results = data.response.venues[0];
-        console.log(results);
+        self.name = results.name;
+        self.address = results.location.address;
+        self.url = results.url;
     }).fail(function () {
-        alert("Request failed");
+        alert("Foursquare API request failed.");
     });
-
-    //Content string for infowindow.
-    var contentString = '<div><h1>' + this.title() + '</h1>' +
-                        '<p><strong>Address: </strong><span>' + this.address() +
-                        '</span></p></div>';
 
     // Style the markers a bit. This will be our listing marker icon.
     var defaultIcon = makeMarkerIcon('f03737');
@@ -159,14 +161,13 @@ var LocationMarker = function(data) {
     this.marker = new google.maps.Marker({
         position: self.location(),
         title: self.title(),
-        address: self.address(),
         animation: google.maps.Animation.DROP,
         icon: defaultIcon
     });
 
     // Create an onclick event to open an infowindow at each marker.
     this.marker.addListener('click', function () {
-        populateInfoWindow(self.marker, infowindow, contentString);
+        populateInfoWindow(self.marker, infowindow);
         panToMarker(self.marker);
         toggleBounce(self.marker);
     });
@@ -201,7 +202,11 @@ var LocationMarker = function(data) {
     // This function populates the infowindow when the marker is clicked. We'll only allow
     // one infowindow which will open at the marker that is clicked, and populate based
     // on that markers position.
-    function populateInfoWindow(marker, infowindow, contentString) {
+    function populateInfoWindow(marker, infowindow) {
+        // Populate content string with data
+        var contentString = '<div><h1>' + self.title() + '<h1></div>' + 
+        '<div><p><strong>Address: </strong>' + self.address + '</p></div>'+ 
+        '<div><p><strong>URL: </strong>' + self.url + '</div>';
         // Check to make sure the infowindow is not already opened on this marker.
         if (infowindow.marker != marker) {
             infowindow.marker = marker;
