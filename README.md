@@ -10,10 +10,10 @@ It is a single page application built using jQuery, Bootstrap 4.0 and KnockoutJS
 
 ## Required Libraries and Dependencies
 
-- jQuery 3.2.1 - used for AJAX request to get JSON response from Foursquare API. As well, for manipulating window.
-- Boostrap 4.0 - for styling navbar and stuff.
-- Font Awesome 4.7.0 - used for toggle menu icon, and map refresh icon.
-- KnockoutJS 3.2.0 - from MVVM controls and data bindings in HMTL.
+- `jQuery 3.2.1` - used for AJAX request to get JSON response from Foursquare API. As well, for manipulating window.
+- `Boostrap 4.0` - for styling navbar and stuff.
+- `Font Awesome 4.7.0` - used for toggle menu icon, and map refresh icon.
+- `KnockoutJS 3.2.0` - from MVVM controls and data bindings in HMTL.
 
 Actually, all these libraries are loaded from CDN, except KnockoutJS which is stored locally, so you don't have to worry about them (as long as you're connected).
 
@@ -28,7 +28,7 @@ Actually, all these libraries are loaded from CDN, except KnockoutJS which is st
 - `index.html` - The main HTML file where we create data bindings.
 - `/src` - Directory containing all other necessary files.
 
-#### /src:
+#### `/src`:
 
 The `/src` directory contains 3 other directories containing all necessary source files, styles and images.
 
@@ -36,7 +36,7 @@ The `/src` directory contains 3 other directories containing all necessary sourc
 - `/img` - Contains foursquare image.
 - `/js` - Contains all necessary javascript files.
 
-#### /js:
+#### `/js`:
 
 The `/js` directory contains a folder with KnockoutJS framework file and other 3 .js files necessary for this project.
 
@@ -48,3 +48,18 @@ The `/js` directory contains a folder with KnockoutJS framework file and other 3
 ### Starting up the Application:
 
 - In order to, start this application just open the `index.html` file.
+
+## References
+
+[Google Maps API Javascript documentation](https://developers.google.com/maps/documentation/javascript/tutorial)
+
+[Foursquare API documentation](https://developer.foursquare.com/docs/api/getting-started)
+
+[KnockoutJS documentation](http://knockoutjs.com/documentation/introduction.html)
+
+[KnockoutJS Utility functions blog post](http://www.knockmeout.net/2011/04/utility-functions-in-knockoutjs.html)
+
+[jQuery getJSON request documentation](http://api.jquery.com/jquery.getjson/)
+
+[Inspiration for sidebar](https://startbootstrap.com/template-overviews/simple-sidebar/)
+
