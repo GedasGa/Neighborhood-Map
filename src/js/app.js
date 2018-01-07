@@ -8,7 +8,7 @@ var infowindow;
 var bounds;
 // ----------------------------------------------------------------- //
 
-var LocationMarker = function(data) {
+var LocationMarker = function (data) {
     var self = this;
 
     this.title = ko.observable(data.title);
@@ -29,7 +29,7 @@ var LocationMarker = function(data) {
     var foursquareURL = 'https://api.foursquare.com/v2/venues/search?ll=' + this.location().lat + ',' + this.location().lng +
         '&client_id=' + ClientID + '&client_secret=' + clientSecret + '&v=20180106&query=' + this.title();
 
-    $.getJSON(foursquareURL).done(function(data) {
+    $.getJSON(foursquareURL).done(function (data) {
         var results = data.response.venues[0];
         self.name = results.name;
         self.address = results.location.address;
@@ -138,12 +138,13 @@ var LocationMarker = function(data) {
     }
 };
 
-var ViewModel = function() {
+var ViewModel = function () {
     var self = this;
 
     // Create a new blank array for all the listing markers.
     this.markers = ko.observableArray([]);
 
+    // Create an obervable, bind it to search bar.
     this.searchLocation = ko.observable("");
 
     // Function to initialize the map within the map div
@@ -174,19 +175,21 @@ var ViewModel = function() {
         self.markers.push(new LocationMarker(markerItem));
     });
 
-    this.filteredLocations = ko.computed(function() {
+    // Function gets string from search box, depending on filter
+    // sets marker item to visible or not visible
+    this.filteredLocations = ko.computed(function () {
         var filter = self.searchLocation().toLowerCase(); // get string from search box
         // If filter is empty, set all markers to visible. (All visibile by default.)
         if (!filter) {
-            self.markers().forEach(function(markerItem) {
+            self.markers().forEach(function (markerItem) {
                 markerItem.visible(true);
             });
             return self.markers();
         // Else filter markers array by setting markers visible to true or false.
         } else {
-            return ko.utils.arrayFilter(self.markers(), function(markerItem) {
+            return ko.utils.arrayFilter(self.markers(), function (markerItem) {
                 var string = markerItem.title().toLowerCase();
-                var result = (string.search(filter) >= 0);
+                var result = string.includes(filter);
                 markerItem.visible(result);
                 return result;                
             });
