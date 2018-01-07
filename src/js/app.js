@@ -150,7 +150,6 @@ var ViewModel = function () {
     // Function to initialize the map within the map div
     this.initMap = function () {
         var mapCanvas = document.getElementById('map');
-        console.log(mapCanvas);
         var mapOptions = {
             center: new google.maps.LatLng(54.698052, 25.271241),
             zoom: 15,
