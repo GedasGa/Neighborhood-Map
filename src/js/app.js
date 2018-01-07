@@ -113,13 +113,13 @@ var LocationMarker = function (data) {
     }
 
     //This function add bounce animation to marker when clicked on it. It has a
-    //timeout function which sets animation to null again after 1500ms.
+    //timeout function which sets animation to null again after 1400ms.
     function toggleBounce(marker) {
         if (marker.getAnimation() !== null) {
             marker.setAnimation(null);
         } else {
             marker.setAnimation(google.maps.Animation.BOUNCE);
-            setTimeout(function() {marker.setAnimation(null);}, 1500);
+            setTimeout(function() {marker.setAnimation(null);}, 1400);
         }
     }
 
