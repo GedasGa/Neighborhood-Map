@@ -31,9 +31,9 @@ var LocationMarker = function (data) {
 
     $.getJSON(foursquareURL).done(function (data) {
         var results = data.response.venues[0];
-        self.name = results.name;
-        self.address = results.location.address;
-        self.url = results.url;
+        self.name = results.name || 'No name provided by Foursquare';
+        self.address = results.location.address || 'No address provided by Foursquare';
+        self.url = results.url || 'No URL provided by Foursquare';
     }).fail(function () {
         alert("Something went wrong with Foursquare API request.");
     });
