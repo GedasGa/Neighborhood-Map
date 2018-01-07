@@ -7,7 +7,7 @@ $(window).resize(function () {
 }).resize();
 
 // On #menu-toggle button click add class 'toggled'
-// to #wrapper and #menu-toggle
+// to #wrapper, #menu-toggle and #foursquare-img
 $('#menu-toggle').click(function (e) {
     e.preventDefault();
     $('#wrapper').toggleClass('toggled');
