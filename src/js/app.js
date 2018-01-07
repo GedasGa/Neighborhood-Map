@@ -169,14 +169,12 @@ var ViewModel = function() {
 
     this.initMap();
 
-
     // Set initial location markers
     markersModel.markers.forEach(function(markerItem){
         self.markers.push(new LocationMarker(markerItem));
     });
 
     this.filteredLocations = ko.computed(function() {
-        // console.log(filter);
         var filter = self.searchLocation().toLowerCase(); // get string from search box
         // If filter is empty, set all markers to visible. (All visibile by default.)
         if (!filter) {
@@ -195,7 +193,6 @@ var ViewModel = function() {
         }
     }, self);
     
-
 };
 
 // Google Maps API callback function for starting the app.
