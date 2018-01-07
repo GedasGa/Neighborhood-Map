@@ -43,7 +43,7 @@ The `/js` directory contains a folder with KnockoutJS framework file and other 3
 - `/lib` - A folder with KnockoutJS framework.
 - `app.js` - Main javascript file, where all the magic happens. Ok ok, mostly all...
 - `data.js` - Contains markers location data and custom styles for Google Maps.
-- `misc.js` - Used for rezising map, to fill the whole window height. As well, for some DOM manipulation.
+- `misc.js` - Used for rezising map, to fill the whole window height.
 
 ### Starting up the Application:
 
