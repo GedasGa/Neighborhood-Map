@@ -61,5 +61,5 @@ The `/js` directory contains a folder with KnockoutJS framework file and other 3
 
 [jQuery getJSON request documentation](http://api.jquery.com/jquery.getjson/)
 
-[Inspiration for sidebar](https://startbootstrap.com/template-overviews/simple-sidebar/)
+[Inspiration for sidebar implementation](https://startbootstrap.com/template-overviews/simple-sidebar/)
 
