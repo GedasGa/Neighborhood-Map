@@ -110,7 +110,7 @@ var LocationMarker = function (data) {
     function panToMarker(marker) {
         map.setZoom(18);
         map.setCenter(marker.position);
-    };
+    }
 
     //This function add bounce animation to marker when clicked on it. It has a
     //timeout function which sets animation to null again after 1500ms.
@@ -200,7 +200,7 @@ var ViewModel = function () {
 // Google Maps API callback function for starting the app.
 function startApp() {
     ko.applyBindings(new ViewModel());
-};
+}
 
 function googleError() {
     alert("Something went wrong with Google Map API request.");
