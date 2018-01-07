@@ -147,6 +147,13 @@ var ViewModel = function () {
     // Create an obervable, bind it to search bar.
     this.searchLocation = ko.observable("");
 
+    // Create an obervable to manipulate css classes
+    this.addToggled = ko.observable(false);
+
+    this.toggleMe = function () {
+        this.addToggled(!this.addToggled());
+    } 
+
     // Function to initialize the map within the map div
     this.initMap = function () {
         var mapCanvas = document.getElementById('map');

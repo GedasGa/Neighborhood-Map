@@ -5,12 +5,3 @@ $(window).resize(function () {
 
     $('#map').css('height', (h - offsetTop));
 }).resize();
-
-// On #menu-toggle button click add class 'toggled'
-// to #wrapper, #menu-toggle and #foursquare-img
-$('#menu-toggle').click(function (e) {
-    e.preventDefault();
-    $('#wrapper').toggleClass('toggled');
-    $('#menu-toggle').toggleClass('toggled');
-    $('#foursquare-img').toggleClass('toggled');
-});

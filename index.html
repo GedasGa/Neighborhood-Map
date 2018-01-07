@@ -45,18 +45,18 @@
         <!-- /Navbar -->
 
         <!-- Wrapper -->
-        <div id="wrapper">
+        <div id="wrapper" data-bind="css: { 'toggled': addToggled }">
 
             <!-- Sidebar -->
             <div id="sidebar-wrapper">
+                <button id="menu-toggle" class="btn btn-info" data-bind="click: toggleMe, css: { 'toggled': addToggled }"><i class="fa fa-angle-double-right"></i></button>
                 <ul class="sidebar-nav" data-bind="visible: filteredLocations().length == 0">
                     <li><strong>No locations found :(</strong></li>
                 </ul>
-                <ul class="sidebar-nav" data-bind="foreach: filteredLocations">
+                <ul class="sidebar-nav" data-bind="foreach: filteredLocations, visible: addToggled">
                     <li data-bind="text: title, click: triggerMarkerClick"></li>
                 </ul>
-                <button id="menu-toggle" class="btn btn-info"><i class="fa fa-angle-double-right"></i></button>
-                <img id="foursquare-img" src="src/img/Powered-by-Foursquare-full-color-300.png" alt="Powered by Foursquare!">
+                <img id="foursquare-img" src="src/img/Powered-by-Foursquare-full-color-300.png" alt="Powered by Foursquare!" data-bind="css: { 'toggled': addToggled }">
             </div>
             <!-- /#sidebar-wrapper -->
 
