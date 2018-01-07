@@ -152,7 +152,7 @@ var ViewModel = function () {
 
     this.toggleMe = function () {
         this.addToggled(!this.addToggled());
-    } 
+    }; 
 
     // Function to initialize the map within the map div
     this.initMap = function () {
