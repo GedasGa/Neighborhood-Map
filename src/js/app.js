@@ -205,3 +205,7 @@ function startApp() {
 function googleError() {
     alert("Something went wrong with Google Map API request.");
 }
+
+function reloadWindow(){
+    window.location.reload();
+}
