@@ -6,7 +6,7 @@ In this project, I have develop a single page application using KnockoutJS frame
 
 ## What it is and it does
 
-It is a single page application built using jQuery, Bootstrap 4.0 and KnockoutJS 3.2.0 framework. Along with that, it uses third-party APIs - Google Maps and Foursquare. Google Maps API is used to show the map and generate the markers on it. Futhermore, Foursquare API is used to get more data about the location, while passing to it just latitude and longitude coordinates. All data form APIs are loaded asynchronously and errors are handled gracefully. For example, in a situation where a third party API does not return the expected result we show an alert to the user notifying that the data can't be loaded.
+It is a single page application built using jQuery, Bootstrap 4.0 and KnockoutJS 3.2.0 framework. Along with that, it uses third-party APIs - Google Maps and Foursquare. Google Maps API is used to show the map and generate the markers on it. Furthermore, Foursquare API is used to get more data about the location, while passing to it just latitude and longitude coordinates. All data form APIs are loaded asynchronously and errors are handled gracefully. For example, in a situation where a third party API does not return the expected result we show an alert to the user notifying that the data can't be loaded.
 
 ## Required Libraries and Dependencies
 
